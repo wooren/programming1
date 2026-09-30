@@ -1,0 +1,108 @@
+import java.util.Scanner;
+
+class Student {
+    private int studentId;
+    private String name;
+    private String major;
+    private long phoneNumber;
+
+    // 학번 getter / setter
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    // 이름 getter / setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // 전공 getter / setter
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    // 전화번호 getter / setter
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+}
+
+
+public class Homework2 {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        Student[] students = new Student[3];
+
+        // 학생 3명 입력
+        for (int i = 0; i < students.length; i++) {
+
+            students[i] = new Student();
+
+            System.out.println((i + 1) + "번째 학생의 정보를 입력하세요.");
+            System.out.println("학번 이름 전공 전화번호 순서로 입력하세요.");
+
+            int studentId = scanner.nextInt();
+            String name = scanner.next();
+            String major = scanner.next();
+
+            String phone = scanner.next();
+
+            phone = phone.replace("-", "");
+
+            long phoneNumber = Long.parseLong(phone);
+
+            students[i].setStudentId(studentId);
+            students[i].setName(name);
+            students[i].setMajor(major);
+            students[i].setPhoneNumber(phoneNumber);
+        }
+
+
+        System.out.println();
+        System.out.println("입력된 학생 정보");
+
+        // 학생 정보 출력
+        for (int i = 0; i < students.length; i++) {
+
+            Student student = students[i];
+
+            String phone = Long.toString(student.getPhoneNumber());
+
+            phone = "0" + phone;
+
+            // 010-xxxx-xxxx 형태로 변환
+            String formattedPhone =
+                    phone.substring(0, 3) + "-" +
+                    phone.substring(3, 7) + "-" +
+                    phone.substring(7);
+
+            System.out.println(
+                    student.getStudentId() + " " +
+                    student.getName() + " " +
+                    student.getMajor() + " " +
+                    formattedPhone
+            );
+        }
+
+        scanner.close();
+    }
+}
